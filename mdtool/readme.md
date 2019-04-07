@@ -4,7 +4,7 @@
 
 ## Download
 
-**JAR file:** coming soon
+**JAR file:** [mdtool.jar](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.1/mdtool.jar) (53.8KB)
 
 ## Usage
 
