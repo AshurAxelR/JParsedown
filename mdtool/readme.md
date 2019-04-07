@@ -69,6 +69,6 @@ MDTool comes with a set of templates and styles located in `templates` folder.
 | style | file | supported templates | preview |
 | :--- | :--- | :--- | ---: |
 | **ghlike** | [md_ghlike.css](templates/md_ghlike.css) | all | [preview](https://ashurrafiev.github.io/JParsedown/mdtool/templates/preview/cheatsheet_ghlike.html) |
-| **jlight** | [md_jdark.css](templates/md_jdark.css) | all | [preview](https://ashurrafiev.github.io/JParsedown/mdtool/templates/preview/cheatsheet_jdark.html) |
-| **jdark** | [md_jlight.css](templates/md_jlight.css) | all | [preview](https://ashurrafiev.github.io/JParsedown/mdtool/templates/preview/cheatsheet_jlight.html) |
+| **jdark** | [md_jdark.css](templates/md_jdark.css) | all | [preview](https://ashurrafiev.github.io/JParsedown/mdtool/templates/preview/cheatsheet_jdark.html) |
+| **jlight** | [md_jlight.css](templates/md_jlight.css) | all | [preview](https://ashurrafiev.github.io/JParsedown/mdtool/templates/preview/cheatsheet_jlight.html) |
 
