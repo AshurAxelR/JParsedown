@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Montserrat:400,700|Open+Sans:400,400i,700,700i');
+
+body {
+	font-family: 'Open Sans', Verdana, Geneva, sans-serif;
+	background-color: #222;
+	color: #ccc;
+	font-size: 11pt;
+	padding: 0px;
+	margin: 40px;
+}
+body.bg {
+	background-color: #111;
+	margin: 0px;
+}
+div.body {
+	position: absolute;
+	width: 840px;
+	min-height: 100%;
+	left: 50%;
+	margin-left: -420px;
+	background-color: #222;
+	padding: 40px;
+	border-left: 1px solid #333;
+	border-right: 1px solid #333;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 12px 0px #333;
+}
+div.page {
+	width: 100%;
+}
+div.page :first-child {
+	margin-top: 0;
+}
+a {
+	color: #fa0;
+	text-decoration: none;
+}
+a:hover {
+	color: #fa0;
+	text-decoration: underline;
+}
+h1 {
+	font-family: 'Montserrat', Verdana, Geneva, sans-serif;
+	font-size: 26pt;
+	font-weight: bold;
+	background-color: #000;
+	color: #fff;
+	margin-right: 0px;
+	margin-left: -48px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	padding: 12px;
+	padding-left: 48px;
+	box-shadow: 0px 0px 8px 0px #555;
+}
+h2 {
+	font-family: 'Montserrat', Verdana, Geneva, sans-serif;
+	font-size: 18pt;
+	color: #fff;
+	font-weight: bold;
+	margin-top: 36px;
+	margin-bottom: 20px;
+	border-top: 1px solid #555;
+	padding-top: 24px;
+	margin-left: -40px;
+	margin-right: -40px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+h3 {
+	font-family: 'Montserrat', Verdana, Geneva, sans-serif;
+	font-size: 16pt;
+	color: #fff;
+	font-weight: normal;
+	margin-top: 24px;
+	margin-bottom: 12px;
+}
+h4 {
+	font-family: 'Montserrat', Verdana, Geneva, sans-serif;
+	font-size: 14pt;
+	color: #fff;
+	font-weight: normal;
+	margin-top: 18px;
+	margin-bottom: 8px;
+}
+h5 {
+	font-size: 14pt;
+	color: #fff;
+	font-weight: normal;
+	margin-top: 12px;
+	margin-bottom: 8px;
+}
+h6 {
+	font-size: 11pt;
+	font-weight: bold;
+	color: #777;
+	margin-top: 12px;
+	margin-bottom: 8px;
+}
+p {
+	text-align: justify;
+	margin: 8px 0px;
+}
+strong, em {
+	color: #eee;
+}
+blockquote {
+	margin: 16px 0px;
+	padding: 10px 12px;
+	padding-bottom: 4px;
+	background-color: #000;
+	border: 1px solid #555;
+	box-shadow: 0px 0px 8px 0px #555;
+}
+ul, ol {
+	margin: 8px 0px;
+	padding: 0px;
+	padding-left: 24px;
+}
+dl {
+	margin: 8px 0px;
+	padding: 0px;
+}
+dt {
+	font-weight: bold;
+}
+dd {
+	margin-left: 24px;
+}
+code, pre {
+	font-family: 'Inconsolata', Consolas, Monaco, monospace;
+	color: #bbb;
+	background-color: #333;
+	border: 1px solid #444;
+}
+code {
+	padding: 2px 4px;
+}
+pre {
+	line-height: 1.25;
+	padding: 8px 12px;
+	margin: 16px 0px;
+	overflow-x: auto;
+}
+pre code {
+	background: none;
+	border: none;
+	padding: 0px;
+}
+table {
+	width: 100%;
+	font: inherit;
+	border-collapse: collapse;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	border: 1px solid #555;
+	box-shadow: 0px 0px 8px 0px #333;
+}
+td, th {
+	text-align: left;
+	vertical-align: top;
+	padding: 4px 12px;
+	border: none;
+}
+thead {
+	background-color: #1a1a1a;
+	border-bottom: 1px solid #555;
+}
+tbody tr:nth-child(even) {
+	background-color: #3a3a3a;
+}
+tbody tr:nth-child(odd) {
+	background-color: #333;
+}
+tbody tr:hover {
+	background-color: #555;
+}
+hr {
+	border: none;
+	border-bottom: 1px solid #444;
+	margin: 20px -40px;
+}
