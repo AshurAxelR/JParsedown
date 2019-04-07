@@ -12,7 +12,7 @@ The library is translated from [Parsedown](https://github.com/erusev/parsedown) 
 * No dependencies
 * [GitHub flavored](https://help.github.com/articles/github-flavored-markdown)
 * [Fast](#performance)
-* [MIT licence](LICENCE)
+* [MIT licence](LICENSE)
 
 The library is compliant with **Java 7+**.
 
