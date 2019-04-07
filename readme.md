@@ -92,8 +92,8 @@ Preliminary benchmark results:
 
 | test file | repeat | JParsedown | Parsedown (PHP) | speedup |
 | :--- | ---: | ---: | ---: | ---: |
-| [cheatsheet.md](mdtool/cheatsheet.md) | &times;100 | **4.2 ms** per item | **5.5** per item | &times;1.31 |
-| [cheatsheet.md](mdtool/cheatsheet.md) | &times;1000 | **2.6 ms** per item | **5.4** per item | &times;2.08 |
+| [cheatsheet.md](mdtool/cheatsheet.md) | &times;100 | **4.2 ms** per item | **5.5 ms** per item | &times;1.31 |
+| [cheatsheet.md](mdtool/cheatsheet.md) | &times;1000 | **2.6 ms** per item | **5.4 ms** per item | &times;2.08 |
 
 The benchmarking does not consider saving and loading times. Only `text()` function is measured.
 
