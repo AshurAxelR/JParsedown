@@ -1254,6 +1254,10 @@ public class JParsedown {
 	
 	protected Pattern inlineMarkerList = Pattern.compile("[!\\*_&\\[:<`~\\\\]");
 	
+	public String line(String line) {
+		return elements(lineElements(line, null));
+	}
+	
 	protected LinkedList<Element> lineElements(String text, HashSet<Class<?>> nonNestables) {
 		text = text.replaceAll("\\r\\n?", "\n");
 		LinkedList<Element> elements = new LinkedList<>();
@@ -1497,5 +1501,5 @@ public class JParsedown {
 		while(i<len && s.charAt(i)==c) i++;
 		return i;
 	}
-	
+
 }

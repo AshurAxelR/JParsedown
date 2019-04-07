@@ -34,6 +34,12 @@ JParsedown parsedown = new JParsedown();
 System.out.println(parsedown.text("Hello _Parsedown_!")); // prints: <p>Hello <em>Parsedown</em>!</p>
 ```
 
+You can also parse inline markdown only:
+
+```java
+System.out.println(parsedown.line("Hello _Parsedown_!")); // prints: Hello <em>Parsedown</em>!
+```
+
 ### Security
 
 See [Parsedown Security](https://github.com/erusev/parsedown#security) page.
@@ -42,10 +48,10 @@ See [Parsedown Security](https://github.com/erusev/parsedown#security) page.
 ### Header IDs
 
 Github automatically generates anchor IDs for each header in Markdown file to make it
-easier to reference individual sections and create contents. JParsedown will attempt to generate
+easier to reference individual sections and create the table of contents. JParsedown attempts to generate
 the same IDs, so the itra-page links in rendered HTML page still work like on Github.
 
-For example, `## Header IDs` will create the following HTML:
+For example, `## Header IDs` creates the following HTML:
 
 ```
 <h2 id="header-ids">Header IDs</h2>
