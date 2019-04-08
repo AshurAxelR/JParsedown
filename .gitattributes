@@ -3,3 +3,4 @@
 
 *.java diff=java
 
+mdtool/templates/* linguist-vendored
