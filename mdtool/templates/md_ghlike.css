@@ -13,10 +13,10 @@ body.bg {
 }
 div.body {
 	position: absolute;
+	width: 100%;
 	min-height: 100%;
-	width: 880px;
-	left: 50%;
-	margin-left: -440px;
+	left: 0px;
+	margin-left: 0px;
 	padding: 16px 0px;
 	box-sizing: border-box;
 }
@@ -24,9 +24,18 @@ div.page {
 	width: 100%;
 	background-color: #fff;
 	padding: 48px;
-	border: 1px solid #d0d5da;
-	border-radius: 3px;
 	box-sizing: border-box;
+}
+@media (min-width:900px) {
+	div.body {
+		width: 880px;
+		left: 50%;
+		margin-left: -440px;
+	}
+	div.page {
+		border: 1px solid #d0d5da;
+		border-radius: 3px;
+	}
 }
 div.page :first-child {
 	margin-top: 0;
