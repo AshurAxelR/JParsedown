@@ -94,17 +94,17 @@ If the page does not contain any headers, `title` will be `null`.
 
 ### Performance
 
-Preliminary benchmark results:
+Benchmark results:
 
-| test file | repeat | JParsedown | Parsedown (PHP) | speedup |
+| test file | repeat | JParsedown | [Parsedown](https://github.com/erusev/parsedown) (PHP) | [flexmark-java](https://github.com/vsch/flexmark-java) |
 | :--- | ---: | ---: | ---: | ---: |
-| [cheatsheet.md](mdtool/cheatsheet.md) | &times;100 | **4.2 ms** per item | **5.5 ms** per item | &times;1.31 |
-| [cheatsheet.md](mdtool/cheatsheet.md) | &times;1000 | **2.6 ms** per item | **5.4 ms** per item | &times;2.08 |
+| [cheatsheet.md](mdtool/cheatsheet.md) | &times;100 | **4.4 ms** per item | **5.5 ms** per item (&times;1.25) | **6.2 ms** per item (&times;1.14) |
+| [cheatsheet.md](mdtool/cheatsheet.md) | &times;1000 | **2.4 ms** per item | **5.4 ms** per item (&times;2.25) | **2.4 ms** per item (&times;1.00) |
 
 The benchmarking does not consider saving and loading times. Only `text()` function is measured.
 
 > At the moment, JParsedown is not properly performance optimised.
-> Speedup is due to Java vs PHP performance difference.
+> Speedup against the origial Parsedown is due to Java vs PHP performance difference.
 > Also note how JIT really helps Java with large batches of work.
 
 ## MDTool
