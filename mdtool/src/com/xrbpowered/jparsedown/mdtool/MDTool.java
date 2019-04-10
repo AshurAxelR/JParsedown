@@ -13,12 +13,22 @@ import com.xrbpowered.jparsedown.JParsedown;
 
 public class MDTool {
 	
-	public static String loadFile(String path) {
+	public static String style;
+	public static String template;
+	public static HashMap<String, String> vars = new HashMap<>();
+	
+	public static boolean errors;
+	
+	public static long styleTime;
+	public static long templateTime;
+	public static String templateExt;
+	
+	public static String loadFile(File file) {
 		try {
-			FileInputStream f = new FileInputStream(path);
-			byte[] buf = new byte[f.available()];
-			f.read(buf);
-			f.close();
+			FileInputStream in = new FileInputStream(file);
+			byte[] buf = new byte[in.available()];
+			in.read(buf);
+			in.close();
 			return new String(buf, StandardCharsets.UTF_8);
 		}
 		catch(IOException e) {
@@ -26,9 +36,9 @@ public class MDTool {
 		}
 	}
 	
-	public static boolean saveFile(String path, String text) {
+	public static boolean saveFile(File file, String text) {
 		try {
-			PrintStream out = new PrintStream(new File(path), "UTF-8");
+			PrintStream out = new PrintStream(file, "UTF-8");
 			out.println(text);
 			out.close();
 			return true;
@@ -58,8 +68,110 @@ public class MDTool {
 		sb.append(template.substring(end));
 		return sb.toString();
 	}
+
+	public static void processFile(File src, File out, boolean checkTime) {
+		long outTime = out.exists() ? out.lastModified() : -1L;
+		if(checkTime && outTime>=0L &&
+				styleTime>=0L && styleTime<outTime &&
+				templateTime>=0L && templateTime<outTime &&
+				src.exists() && src.lastModified()<outTime) {
+			System.out.println(out.toString()+" is up to date");
+			return;
+		}
+		
+		String source = loadFile(src);
+		if(source==null) {
+			System.err.println("*Error* Cannot load "+src.toString());
+			errors = true;
+			return;
+		}
+		
+		JParsedown parsedown = new JParsedown();
+		String body = parsedown.text(source);
+		vars.put("body", body);
+		vars.put("title", parsedown.title);
+		String output;
+		if(template!=null)
+			output = processTemplate(template, vars);
+		else
+			output = body;
+		
+		if(!saveFile(out, output)) {
+			System.err.println("*Error* Cannot save "+out.toString());
+			errors = true;
+		}
+		else {
+			System.out.println("Processed "+out.toString());
+		}
+	}
+
+	public static void processFile(File src, File outDir, boolean checkTime, boolean checkExtension) {
+		if(outDir==null) {
+			outDir = src.getParentFile();
+			if(outDir==null)
+				outDir = new File(".");
+		}
+		String filename = src.getName();
+		int dotIndex = filename.lastIndexOf('.');
+		String name, ext;
+		if(dotIndex>0 && dotIndex<filename.length()-1) {
+			name = filename.substring(0, dotIndex);
+			ext = filename.substring(dotIndex);
+		}
+		else {
+			name = filename;
+			ext = "";
+		}
+
+		if(!checkExtension || ext.equalsIgnoreCase(".md")) {
+			processFile(src, new File(outDir, name+templateExt), checkTime);
+		}
+	}
+
+	public static void scanFolder(File srcDir, File outDir, boolean checkTime) {
+		if(!outDir.exists()) {
+			System.out.println("Creating directory "+outDir.toString());
+			outDir.mkdirs();
+		}
+		File[] files = srcDir.listFiles();
+		for(File f : files) {
+			if(f.isDirectory()) {
+				if(!f.getName().startsWith("."))
+					scanFolder(f, new File(outDir, f.getName()), checkTime);
+			}
+			else {
+				processFile(f, outDir, checkTime, true);
+			}
+		}
+	}
+
+	public static void benchmark(String sourcePath, int n) {
+		String source = loadFile(new File(sourcePath));
+		if(source==null) {
+			System.err.println("*Error* Cannot load source file.");
+			System.exit(1);
+		}
+		
+		long tstart = System.currentTimeMillis();
+		for(int i=0; i<n; i++) {
+			JParsedown parsedown = new JParsedown();
+			parsedown.text(source);
+		}
+		long time = System.currentTimeMillis() - tstart;
+		System.out.printf("File %s\n\tParsed %d times in %d ms (%.1fms per iteration)\n",
+				sourcePath, n, time, (double)time/(double)n);
+	}
+	
+	public static void help() {
+		System.out.println("Usage:\n"
+			+ "java -jar md.jar sourcefile [-o outputpath] [options]\n\n"
+			+ "Recursive mode:\n"
+			+ "java -jar md.jar -r sourcepath [-o outputpath] [options]\n");
+	}
 	
 	public static void main(String[] args) {
+		boolean recursiveMode = false;
+		boolean checkTime = false;
 		String sourcePath = null;
 		String outputPath = null;
 		String templatePath = null;
@@ -71,6 +183,12 @@ public class MDTool {
 			for(int i=0; i<args.length; i++) {
 				if(args[i].charAt(0)=='-') {
 					switch(args[i]) {
+						case "-r":
+							recursiveMode = true;
+							break;
+						case "-m":
+							checkTime = true;
+							break;
 						case "-o":
 							outputPath = args[++i];
 							break;
@@ -96,77 +214,90 @@ public class MDTool {
 			}
 		}
 		catch(Exception e) {
-			System.err.println("Bad command line parameters.");
+			System.err.println("*Error* Bad command line parameters.");
+			help();
 			System.exit(1);
 		}
 		if(sourcePath==null) {
-			System.err.println("No source file");
+			System.err.println("*Error* No source file or path");
+			help();
 			System.exit(1);
 		}
-
-		String source = loadFile(sourcePath);
-		if(source==null) {
-			System.err.println("Cannot load source file.");
-			System.exit(1);
-		}
-		
 		if(benchmark>0) {
-			long tstart = System.currentTimeMillis();
-			for(int i=0; i<benchmark; i++) {
-				JParsedown parsedown = new JParsedown();
-				parsedown.text(source);
-			}
-			long time = System.currentTimeMillis() - tstart;
-			System.out.printf("Parsed %d times in %d ms (%.1fms per iteration)\n",
-					benchmark, time, (double)time/(double)benchmark);
+			benchmark(sourcePath, benchmark);
 			System.exit(0);
 		}
 
-		if(outputPath==null) {
-			int ext = sourcePath.lastIndexOf('.');
-			outputPath = ext<0 ? sourcePath : sourcePath.substring(0, ext);
-			outputPath += ".html";
-		}
-		
-		JParsedown parsedown = new JParsedown();
-		String body = parsedown.text(source);
-
-		String output = body;
-		if(templatePath!=null) {
-			HashMap<String, String> vars = new HashMap<>();
-			
-			vars.put("body", body);
-			vars.put("title", parsedown.title);
-			
-			String style = null;
-			if(stylePath!=null) {
-				if(embedStyle) {
-					String css = loadFile(stylePath);
-					if(css==null)
-						System.err.println("Cannot load stylesheet.");
-					else
-						style = "<style><!--\n"+css+"\n--></style>";
+		style = null;
+		styleTime = -1L;
+		if(stylePath!=null) {
+			if(embedStyle) {
+				File cssFile = new File(stylePath);
+				String css = loadFile(cssFile);
+				if(css==null) {
+					System.err.println("*Error* Cannot load stylesheet.");
+					System.exit(1);
 				}
-				else
-					style = "<link rel=\"stylesheet\" href=\""+stylePath+"\" />";
+				else {
+					style = "<style><!--\n"+css+"\n--></style>";
+					styleTime = cssFile.lastModified();
+				}
 			}
-			vars.put("style", style);
-	
-			String template = loadFile(templatePath);
+			else
+				style = "<link rel=\"stylesheet\" href=\""+stylePath+"\" />";
+		}
+		vars.put("style", style);
+
+		template = null;
+		templateTime = -1L;
+		templateExt = ".html";
+		if(templatePath!=null) {
+			File templateFile = new File(templatePath);
+			template = loadFile(templateFile);
 			if(template==null) {
-				System.err.println("Cannot load template file.");
+				System.err.println("*Error* Cannot load template file.");
 				System.exit(1);
 			}
-			
-			output = processTemplate(template, vars);
+			else {
+				templateTime = templateFile.lastModified();
+			}
 		}
-		
-		if(!saveFile(outputPath, output)) {
-			System.err.println("Cannot save output file.");
+
+		errors = false;
+		if(recursiveMode) {
+			File srcDir = new File(sourcePath);
+			if(!srcDir.isDirectory()) {
+				System.err.println("*Error* Source path is not a directory");
+				System.exit(1);
+			}
+			File outDir = new File(sourcePath);
+			if(outputPath!=null) {
+				outDir = new File(outputPath);
+				if(!outDir.isDirectory()) {
+					System.err.println("*Error* Output path is not a directory");
+					System.exit(1);
+				}
+			}
+			scanFolder(srcDir, outDir, checkTime);
+		}
+		else {
+			if(outputPath!=null) {
+				File outDir = new File(outputPath);
+				if(!outDir.isDirectory())
+					processFile(new File(sourcePath), outDir, checkTime);
+				else
+					processFile(new File(sourcePath), outDir, checkTime, false);
+			}
+			else
+				processFile(new File(sourcePath), null, checkTime, false);
+		}
+
+		if(errors) {
+			System.out.println("Done with errors");
 			System.exit(1);
 		}
-		
-		System.out.println("Done");
+		else
+			System.out.println("Done");
 	}
 
 }

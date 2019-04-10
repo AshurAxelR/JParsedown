@@ -1,23 +1,34 @@
-# MDTool
+# MD Tool
 
-**MDTool** is a JParsedown-based command line tool for converting Markdown files into HTML pages.
+**MD** tool is a JParsedown-based command line tool for converting Markdown files into HTML pages.
 
 ## Download
 
-**JAR file:** [mdtool.jar](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.1/mdtool.jar) (53.8KB)
+**JAR file:** [md.jar](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.2/md.jar) (55.5KB)
+
+**Templates and styles** [templates.zip](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.2/templates.zip) (19.9KB)
+
 
 ## Usage
 
 ```
-java -jar mdtool.jar inputfile [-o outputfile] [options]
+java -jar md.jar sourcefile [-o outputfile] [options]
+```
+
+Recursive mode:
+
+```
+java -jar md.jar -r sourcedir [-o outputdir] [options]
 ```
 
 | option | description |
 | :--- | :--- |
-| **-o**&nbsp;filename | Optional: output file name. By default, the output file name is derived from input file name by replacing the extension with `html`. |
-| **-t**&nbsp;filename | Optional: HTML template file name. By default, the output will contain only the body of HTML. |
-| **-s**&nbsp;filename | Optional: CSS stylesheet file name. By default, no stylesheet is linked or embedded. |
+| **-o**&nbsp;path | Optional: output path or filename. If **-o** is directory or not specified, the output file name is derived from source file name by replacing the extension with `html` or template's extension. |
+| **-t**&nbsp;filename | Optional: HTML template file name. If not specified, the output will contain only the body of HTML. |
+| **-s**&nbsp;filename | Optional: CSS stylesheet file name. If not specified, no stylesheet is linked or embedded. |
 | **-e** | Optional: embed stylesheet within a `<style>` tag. By default, the stylesheet is linked using `<link>` tag. When linking CSS, the **-s** parameter is used in `href` as is without any path conversion. |
+| **-r** | Optional: recursive mode. In recursive mode, all MD files in the source directory and its subdirectories are processed automatically. |
+| **-m** | Optional: check for modification. The Markdown is processed only if there is no output file or the output file is older than the source, stylesheet, or template. |
 
 
 ## HTML Template Format
@@ -53,7 +64,7 @@ It is also recommended to use `<meta charset="UTF-8">` as the Markdown processin
 
 ## Built-in Templates and Styles
 
-MDTool comes with a set of templates and styles located in `templates` folder.
+MD tool comes with a set of templates and styles located in `templates` folder.
 
 ### Templates
 
