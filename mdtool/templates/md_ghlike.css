@@ -26,11 +26,11 @@ div.page {
 	padding: 48px;
 	box-sizing: border-box;
 }
-@media (min-width:900px) {
+@media (min-width:1000px) {
 	div.body {
-		width: 880px;
+		width: 980px;
 		left: 50%;
-		margin-left: -440px;
+		margin-left: -490px;
 	}
 	div.page {
 		border: 1px solid #d0d5da;
