@@ -99,7 +99,7 @@ Benchmark results:
 
 | test file | repeat | JParsedown | [Parsedown](https://github.com/erusev/parsedown) (PHP) | [flexmark-java](https://github.com/vsch/flexmark-java) |
 | :--- | ---: | ---: | ---: | ---: |
-| [cheatsheet.md](mdtool/cheatsheet.md) | &times;100 | **4.4 ms** per item | **5.5 ms** per item (&times;1.25) | **6.2 ms** per item (&times;1.14) |
+| [cheatsheet.md](mdtool/cheatsheet.md) | &times;100 | **4.4 ms** per item | **5.5 ms** per item (&times;1.25) | **6.2 ms** per item (&times;1.41) |
 | [cheatsheet.md](mdtool/cheatsheet.md) | &times;1000 | **2.4 ms** per item | **5.4 ms** per item (&times;2.25) | **2.4 ms** per item (&times;1.00) |
 
 The benchmarking does not consider saving and loading times. Only `text()` function is measured.
