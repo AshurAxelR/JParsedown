@@ -885,7 +885,7 @@ public class JParsedown {
 		@Override
 		public Inline inline(String text, String context) {
 			Element element = new Element("a", new LineElementsHandler(null));
-			// element.nonNestables.add(InlineUrl.class);
+			element.nonNestables.add(InlineUrl.class);
 			element.nonNestables.add(InlineLink.class);
 			
 			int extent = 0;
@@ -893,7 +893,7 @@ public class JParsedown {
 			
 			Matcher m;
 			// Parsedown original pattern: "\\[((?:[^][]++|(?R))*+)\\]" (does not compile in Java)
-			if((m = Pattern.compile("\\[(.*?)\\]").matcher(remainder)).find()) {
+			if((m = Pattern.compile("\\[((?:\\\\.|[^\\[\\]]|!\\[[^\\[\\]]*\\])*)\\]").matcher(remainder)).find()) {
 				((LineElementsHandler) element.handler).text = m.group(1);
 				extent += m.group(0).length();
 				remainder = remainder.substring(extent);
