@@ -134,6 +134,9 @@ code, pre {
 	background-color: #f5f5f5;
 	border: 1px solid #eee;
 }
+a code {
+	color: inherit;
+}
 code {
 	padding: 2px 4px;
 }
