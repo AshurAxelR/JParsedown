@@ -620,7 +620,7 @@ public class JParsedown {
 			Matcher m;
 			if(line.text.indexOf(']')>=0 && (m = Pattern.compile("^\\[(.+?)\\]:[ ]*+<?(\\S+?)>?(?:[ ]+[\"\\'(](.+)[\"\\')])?[ ]*+$").matcher(line.text)).find()) {
 				String id = m.group(1).toLowerCase();
-				ReferenceData data = new ReferenceData(m.group(2), m.group(3));
+				ReferenceData data = new ReferenceData(convertUrl(m.group(2)), m.group(3));
 				referenceDefinitions.put(id, data);
 				return new BlockReference().setElement(new Element());
 			}
@@ -902,7 +902,7 @@ public class JParsedown {
 				return null;
 			
 			if((m = Pattern.compile("^[(]\\s*+((?:[^ ()]++|[(][^ )]+[)])++)(?:[ ]+(\"[^\"]*+\"|\\'[^\\']*+\'))?\\s*+[)]").matcher(remainder)).find()) {
-				element.attributes.put("href", m.group(1));
+				element.attributes.put("href", convertUrl(m.group(1)));
 				if(m.group(2)!=null)
 					element.attributes.put("title", m.group(2).substring(1, m.group(2).length()-1));
 				extent += m.group(0).length();
@@ -995,7 +995,7 @@ public class JParsedown {
 			Matcher m;
 			if(context.contains("http") && (m = Pattern.compile("\\bhttps?+:[\\/]{2}[^\\s<]+\\b\\/*+",
 					Pattern.CASE_INSENSITIVE|Pattern.UNICODE_CHARACTER_CLASS).matcher(context)).find()) {
-				String url = m.group(0);
+				String url = convertUrl(m.group(0));
 				Inline inline = new InlineUrl().setExtent(url);
 				inline.position = m.start(0);
 				inline.element = new Element("a", url).addAttribute("href", url);
@@ -1011,7 +1011,7 @@ public class JParsedown {
 		public Inline inline(String text, String context) {
 			Matcher m;
 			if(text.indexOf('>')>=0 && (m = Pattern.compile("^<(\\w++:\\/{2}[^ >]++)>", Pattern.DOTALL).matcher(text)).find()) {
-				String url = m.group(1);
+				String url = convertUrl(m.group(1));
 				return new InlineUrlTag().setExtent(m.group(0)).setElement(
 					new Element("a", url).addAttribute("href", url)
 				);
@@ -1026,6 +1026,8 @@ public class JParsedown {
 	protected boolean urlsLinked = true;
 	protected boolean safeMode = false;
 	protected boolean strictMode = false;
+	
+	protected String mdUrlReplacement = null;
 	
 	protected HashMap<String, ReferenceData> referenceDefinitions;
 	protected HashMap<String, Integer> headerIds;
@@ -1074,6 +1076,11 @@ public class JParsedown {
 	
 	public JParsedown setStrictMode(boolean strictMode) {
 		this.strictMode = strictMode;
+		return this;
+	}
+	
+	public JParsedown setMdUrlReplacement(String replacement) {
+		this.mdUrlReplacement = replacement;
 		return this;
 	}
 	
@@ -1333,6 +1340,16 @@ public class JParsedown {
 		}
 		
 		return headerId;
+	}
+	
+	protected String convertUrl(String url) {
+		if(mdUrlReplacement==null || url.indexOf(':')>=0)
+			return url;
+		Matcher m = Pattern.compile("(\\.md)(#.*)?$").matcher(url);
+		if(m.find())
+			return m.replaceFirst(mdUrlReplacement+"$2");
+		else
+			return url;
 	}
 	
 	protected String element(Element element) {

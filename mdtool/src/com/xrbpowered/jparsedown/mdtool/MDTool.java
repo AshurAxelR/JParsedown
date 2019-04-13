@@ -22,6 +22,7 @@ public class MDTool {
 	public static long styleTime;
 	public static long templateTime;
 	public static String templateExt;
+	public static String mdUrlReplacement;
 	
 	public static String loadFile(File file) {
 		try {
@@ -86,7 +87,7 @@ public class MDTool {
 			return;
 		}
 		
-		JParsedown parsedown = new JParsedown();
+		JParsedown parsedown = new JParsedown().setMdUrlReplacement(mdUrlReplacement);
 		String body = parsedown.text(source);
 		vars.put("body", body);
 		vars.put("title", parsedown.title);
@@ -178,6 +179,7 @@ public class MDTool {
 		String stylePath = null;
 		boolean embedStyle = false;
 		int benchmark = 0;
+		boolean replaceMdUrls = false;
 
 		try {
 			for(int i=0; i<args.length; i++) {
@@ -200,6 +202,9 @@ public class MDTool {
 							break;
 						case "-e":
 							embedStyle = true;
+							break;
+						case "-u":
+							replaceMdUrls = true;
 							break;
 						case "-benchmark":
 							benchmark = Integer.parseInt(args[++i]);
@@ -262,6 +267,8 @@ public class MDTool {
 				templateTime = templateFile.lastModified();
 			}
 		}
+		
+		mdUrlReplacement = replaceMdUrls ? templateExt : null;
 
 		errors = false;
 		if(recursiveMode) {
