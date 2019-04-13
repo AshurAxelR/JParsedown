@@ -20,6 +20,7 @@ Additinoal features of JParsedown that are not (yet) available in the original P
 
 * Github-compatible [Header IDs](#header-ids)
 * [Page title detection](#page-title-detection)
+* Optional [MD links conversion](#md-links-conversion)
 
 
 ### Download
@@ -68,6 +69,7 @@ and can be referenced as follows:
 ID generation in JParsedown follows these rules:
 
 1. The header text is converted to lower case.
+1. Special HTML characters like `&ndash;` are removed.
 1. All characters other than letters, numbers, or whitespaces are removed.
 1. Whitespaces are replaced with dashes `-`.
 1. ID is URL-encoded to handle Unicode letters.
@@ -91,6 +93,19 @@ will be the title.
 If the page does not contain any headers, `title` will be `null`.
 
 > **Note:** The Markdown in the title is not stripped or processed.
+
+
+### MD Links Conversion
+
+Github documentation may have links between MD files like `[see other file](file.md#anchor)`.
+When converting documentation to static HTML pages, it is often desired to convert these links to respective HTML files, i.e. `[see other file](file.html#anchor)`.
+
+JParsedown provides a function `setMdUrlReplacement(String)` that tells what replacement to use for `.md` extensions.
+For example, `setMdUrlReplacement(".html")` will replace `.md` in URL links with `.html`.
+
+> The conversion is applied only to relative URLs, i.e. the ones that do not contain colon `:` character.
+
+Use `setMdUrlReplacement(null)` to disable conversion (default behaviour).
 
 
 ### Performance

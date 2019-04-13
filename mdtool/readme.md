@@ -29,7 +29,7 @@ java -jar md.jar -r sourcedir [-o outputdir] [options]
 | **-e** | Optional: embed stylesheet within a `<style>` tag. By default, the stylesheet is linked using `<link>` tag. When linking CSS, the **-s** parameter is used in `href` as is without any path conversion. |
 | **-r** | Optional: recursive mode. Processes all MD files in the source directory and its subdirectories. |
 | **-m** | Optional: check for modification. The Markdown is processed only if there is no output file or the output file is older than the source, stylesheet, or template. |
-
+| **-u** | Optional: enable [MD links conversion](../readme.md#md-links-conversion). Replacement extension is `.html` or template's extension. |
 
 ## HTML Template Format
 
