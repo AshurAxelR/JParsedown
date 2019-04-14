@@ -27,7 +27,7 @@ Additinoal features of JParsedown that are not (yet) available in the original P
 
 **Source file:** [JParsedown.java](src/com/xrbpowered/jparsedown/JParsedown.java)
 
-**JAR file:** [jparsedown-1.0.2.jar](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.2/jparsedown-1.0.2.jar) (50.4 KB)
+**JAR file:** [jparsedown-1.0.3.jar](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.3/jparsedown-1.0.3.jar) (50.7 KB)
 
 ### Usage
 
