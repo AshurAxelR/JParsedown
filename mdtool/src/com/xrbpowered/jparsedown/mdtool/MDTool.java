@@ -168,6 +168,14 @@ public class MDTool {
 			+ "java -jar md.jar sourcefile [-o outputpath] [options]\n\n"
 			+ "Recursive mode:\n"
 			+ "java -jar md.jar -r sourcepath [-o outputpath] [options]\n");
+		System.out.println("Options:\n"
+			+ "-o path\n\toutput path or filename\n"
+			+ "-t filename\n\tHTML template file name\n"
+			+ "-s filename\n\tCSS stylesheet file name\n"
+			+ "-e\tembed stylesheet\n"
+			+ "-r\trecursive mode\n"
+			+ "-m\tcheck files for modification\n"
+			+ "-u\tenable MD links conversion\n");
 	}
 	
 	public static void main(String[] args) {
@@ -206,7 +214,11 @@ public class MDTool {
 						case "-u":
 							replaceMdUrls = true;
 							break;
-						case "-benchmark":
+						case "--help":
+							help();
+							System.exit(0);
+							return;
+						case "--benchmark":
 							benchmark = Integer.parseInt(args[++i]);
 							break;
 						default:
