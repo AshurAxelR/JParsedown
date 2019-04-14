@@ -4,9 +4,9 @@
 
 ## Download
 
-**JAR file:** [md.jar](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.2/md.jar) (55.5KB)
+**JAR file:** [md.jar](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.3/md.jar) (56.1KB)
 
-**Templates and styles** [templates.zip](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.2/templates.zip) (19.9KB)
+**Templates and styles** [templates.zip](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.3/templates.zip) (20.2KB)
 
 
 ## Usage
