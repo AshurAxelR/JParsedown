@@ -125,15 +125,15 @@ public class MDTool {
 		}
 
 		if(!checkExtension || ext.equalsIgnoreCase(".md")) {
+			if(!outDir.exists()) {
+				System.out.println("Creating directory "+outDir.toString());
+				outDir.mkdirs();
+			}
 			processFile(src, new File(outDir, name+templateExt), checkTime);
 		}
 	}
 
 	public static void scanFolder(File srcDir, File outDir, boolean checkTime) {
-		if(!outDir.exists()) {
-			System.out.println("Creating directory "+outDir.toString());
-			outDir.mkdirs();
-		}
 		File[] files = srcDir.listFiles();
 		for(File f : files) {
 			if(f.isDirectory()) {
