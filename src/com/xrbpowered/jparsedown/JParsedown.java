@@ -320,7 +320,8 @@ public class JParsedown {
 			}
 			int len = startSpan(line.text, marker);
 			if(len>=openerLength && line.text.substring(len).trim().isEmpty()) {
-				e.text = e.text.substring(1);
+				if(!e.text.isEmpty())
+					e.text = e.text.substring(1);
 				complete = true;
 				return this;
 			}
