@@ -1,3 +1,12 @@
+/*
+Copyright (c) 2019 Ashur Rafiev
+https://github.com/ashurrafiev/JParsedown
+MIT Licence: https://github.com/ashurrafiev/JParsedown/blob/master/LICENSE
+
+This work is derived from Parsedown version 1.8.0-beta-5:
+Copyright (c) 2013-2018 Emanuil Rusev
+http://parsedown.org
+*/
 package com.xrbpowered.jparsedown;
 
 import java.io.UnsupportedEncodingException;
@@ -13,6 +22,8 @@ import java.util.regex.Pattern;
 
 public class JParsedown {
 
+	public static final String version = "1.0.4";
+	
 	protected class ReferenceData {
 		public String url;
 		public String title;

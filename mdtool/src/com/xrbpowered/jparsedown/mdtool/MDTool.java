@@ -218,6 +218,10 @@ public class MDTool {
 							help();
 							System.exit(0);
 							return;
+						case "--version":
+							System.out.println("JParsedown library version: "+JParsedown.version);
+							System.exit(0);
+							return;
 						case "--benchmark":
 							benchmark = Integer.parseInt(args[++i]);
 							break;
