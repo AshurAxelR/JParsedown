@@ -4,10 +4,8 @@
 
 ## Download
 
-**JAR file:** [md.jar](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.3/md.jar) (56.1KB)
-
-**Templates and styles** [templates.zip](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.3/templates.zip) (20.2KB)
-
+[md.zip](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.4/md.zip) (71.4KB)  
+contains **md.jar** and templates.
 
 ## Usage
 
@@ -30,6 +28,8 @@ java -jar md.jar -r sourcedir [-o outputdir] [options]
 | **-r** | Optional: recursive mode. Processes all MD files in the source directory and its subdirectories. |
 | **-m** | Optional: check for modification. The Markdown is processed only if there is no output file or the output file is older than the source, stylesheet, or template. |
 | **-u** | Optional: enable [MD links conversion](../readme.md#md-links-conversion). Replacement extension is `.html` or template's extension. |
+| **--version** | Print JParsedown library version and exit. |
+| **--help** | Print usage help and exit. |
 
 ## HTML Template Format
 
