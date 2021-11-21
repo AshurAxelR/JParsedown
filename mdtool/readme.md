@@ -4,7 +4,7 @@
 
 ## Download
 
-[md.zip](https://github.com/ashurrafiev/JParsedown/releases/download/1.0.4/md.zip) (71.4KB)  
+[md.zip](https://github.com/AshurAxelR/JParsedown/releases/download/1.0.4/md.zip) (71.4KB)  
 contains **md.jar** and templates.
 
 ## Usage
