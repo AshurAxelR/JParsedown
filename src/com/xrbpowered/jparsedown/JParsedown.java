@@ -1336,7 +1336,7 @@ public class JParsedown {
 			titleLevel = level;
 		}
 		
-		String headerId = text.toLowerCase().replaceAll("&#?+[0-9a-zA-Z]++;", "").replaceAll("[^\\p{L}\\d\\s]", "").replaceAll("\\s+", "-");
+		String headerId = text.toLowerCase().replaceAll("&#?+[0-9a-zA-Z]++;", "").replaceAll("[^_\\p{L}\\d\\s]", "").replaceAll("\\s+", "-");
 		try {
 			headerId = URLEncoder.encode(headerId, "UTF-8");
 		} catch(UnsupportedEncodingException e) {

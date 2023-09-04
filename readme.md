@@ -70,7 +70,7 @@ ID generation in JParsedown follows these rules:
 
 1. The header text is converted to lower case.
 1. Special HTML characters like `&ndash;` are removed.
-1. All characters other than letters, numbers, or whitespaces are removed.
+1. All characters other than letters, numbers, underscore, or whitespaces are removed.
 1. Whitespaces are replaced with dashes `-`.
 1. ID is URL-encoded to handle Unicode letters.
 1. Duplicate IDs have a dash and a number appended: `header-ids`, `header-ids-1`, `header-ids-2`, etc.
